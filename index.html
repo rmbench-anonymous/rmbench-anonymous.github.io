@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design. Anonymous project page.">
+  <meta name="description" content="RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design. Anonymous project page and supplementary material.">
   <meta name="keywords" content="Memory, Robotic Manipulation, Benchmark, Policy Design, Simulation, Real-world Experiments">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,11 +15,12 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
 
   <style>
-    section {
-        margin: 0rem 0;
+    section.section {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
     }
     .hero-body {
-        padding-bottom: 1.5rem;
+        padding-bottom: 1rem;
     }
     .video-block video {
         width: 100%;
@@ -28,6 +29,59 @@
         margin: 0 auto;
         border-radius: 6px;
         background: #000;
+    }
+    table.supp {
+        margin: 0 auto 0.75rem auto;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    }
+    table.supp caption {
+        caption-side: top;
+        font-weight: 600;
+        padding-bottom: 0.5rem;
+        text-align: center;
+    }
+    table.supp th, table.supp td {
+        border: 1px solid #dbdbdb;
+        padding: 0.4rem 0.75rem;
+        vertical-align: top;
+        text-align: left;
+    }
+    table.supp thead th {
+        background: #f5f5f5;
+        text-align: left;
+    }
+    .table-pair {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+    .table-pair table.supp {
+        margin: 0;
+    }
+    figure.supp {
+        margin: 1rem auto;
+        max-width: 900px;
+    }
+    figure.supp img {
+        width: 100%;
+    }
+    figure.supp figcaption {
+        font-size: 0.9rem;
+        text-align: justify;
+        padding: 0.5rem 0.25rem 0 0.25rem;
+    }
+    .figure-pair {
+        display: flex;
+        gap: 1.5rem;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+    .figure-pair figure.supp {
+        flex: 1 1 380px;
+        margin: 0.5rem 0;
     }
   </style>
 </head>
@@ -90,20 +144,64 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
-                    <h2 class="title is-3">Overview</h2>
+                    <h2 class="title is-3">1. RMBench Task Descriptions</h2>
                 </div>
             </div>
+            <div class="columns is-centered">
+                <div class="column">
+                    <table class="supp">
+                        <caption>Task descriptions of the RMBench benchmark.</caption>
+                        <thead>
+                            <tr><th>Task</th><th>Description</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><em>Observe and Pick Up</em></td><td>The robot observes a reference object, remembers it after it is hidden, and picks up the matching object from the table.</td></tr>
+                            <tr><td><em>Rearrange Blocks</em></td><td>The robot moves a middle block to a pad, presses a button, and moves another block back to the middle position.</td></tr>
+                            <tr><td><em>Put Back Block</em></td><td>The robot moves a block to the center, presses a button, and returns the block to its original pad.</td></tr>
+                            <tr><td><em>Swap Blocks</em></td><td>The robot swaps two blocks using an empty pad and then presses the confirmation button.</td></tr>
+                            <tr><td><em>Swap T</em></td><td>The robot swaps the positions and orientations of two colored T-shaped blocks.</td></tr>
+                            <tr><td><em>Battery Try</em></td><td>The robot repeatedly tries different battery insertion orders and orientations until both batteries are correctly inserted.</td></tr>
+                            <tr><td><em>Blocks Ranking Try</em></td><td>The robot repeatedly arranges colored blocks and presses a button until the correct ordering is found.</td></tr>
+                            <tr><td><em>Cover Blocks</em></td><td>The robot covers blocks from left to right, then uncovers them in the red&ndash;green&ndash;blue order.</td></tr>
+                            <tr><td><em>Press Button</em></td><td>The robot presses two buttons according to the shown digits and then presses the confirmation button.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
-                    <img src="./images/rmbench_tasks.jpg" alt="RMBench tasks" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                    <h2 class="title is-3">2. Stability and Transferability of Task Memory Complexity</h2>
                 </div>
             </div>
-            <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered">
                 <div class="column">
                     <div class="content has-text-justified">
-                        <p>
-                            <b>Abstract.</b> Robotic manipulation policies have made rapid progress in recent years, yet most existing approaches give limited consideration to memory capabilities. Consequently, they struggle to solve tasks that require reasoning over historical observations and maintaining task-relevant information over time, which are common in real-world manipulation. Although several memory-aware policies have been proposed, systematic evaluation of memory-dependent manipulation remains underexplored, and the relationship between architectural choices and memory performance remains unclear. To address this gap, we introduce <b>RMBench</b>, a simulation benchmark of nine manipulation tasks spanning two levels of memory complexity for systematic evaluation of policy memory capabilities. We further propose <b>Mem-0</b>, a modular manipulation policy whose explicit memory components can be ablated independently. Evaluating eight policies on the nine simulated tasks and four policies on three physical tasks, we identify memory-related limitations in existing policies and show that the benefit of a memory component depends on whether the same information is already available elsewhere in the policy hierarchy, with subtask termination detection rather than memory representation forming the dominant bottleneck.
-                        </p>
+                        <p>This section examines two properties of the Task Memory Complexity (TMC) protocol: whether it applies to tasks outside RMBench, and whether annotators other than the authors reproduce the intended labels. Both are necessary if TMC is to serve as a benchmark design criterion rather than as a post-hoc description of the tasks we happened to build.</p>
+
+                        <h4 class="title is-5" style="margin-top: 1.25rem;">Transferability to real-robot tasks</h4>
+                        <p>TMC is defined by the structure of the task, namely the minimum number of past observations that resolve its ambiguous decision points, and not by any policy architecture. It is therefore applicable wherever those decision points can be enumerated. To test this, we annotated 50 manipulation tasks drawn from the DROID and AgiBot World datasets. Annotation followed the protocol described in the main paper: enumerate the decision points at which the current observation admits more than one admissible action, identify the past observations that resolve each ambiguity, and discard redundant items. Every task in this set received a label within the existing space {M(0), M(1), M(n)}, and none required extending the label space or introducing task-specific exceptions. We report this as evidence of applicability rather than as a survey: the sample was not drawn so as to be representative of either dataset, and we therefore do not report a distribution over TMC levels for it. The claim supported by this exercise is that the protocol terminates with a well-defined label on tasks it was not designed around.</p>
+
+                        <h4 class="title is-5" style="margin-top: 1.25rem;">Annotation stability study</h4>
+                        <p>We further conducted a study with ten independent participants who had not previously read the paper. Each participant received only the written protocol and the three-way label space {M(0), M(1), M(n)}, and then annotated the same task set without consulting the authors or one another. Performance is measured as the per-annotator fraction of tasks whose label matches the reference label assigned by the task designers. As shown below, agreement averaged 96% over the ten participants, ranging from 100% to 80%. For calibration, a labeler guessing uniformly at random over the three-way space would reach 33%.</p>
+                    </div>
+                    <table class="supp">
+                        <caption>Stability of TMC annotation.</caption>
+                        <thead>
+                            <tr><th>Metric</th><th>Average</th><th>Highest</th><th>Lowest</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Agreement (%)</td><td>96</td><td>100</td><td>80</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="content has-text-justified">
+                        <h4 class="title is-5" style="margin-top: 1.25rem;">Discussion</h4>
+                        <p>Two conclusions follow, both deliberately narrow. First, TMC applies to tasks it was not designed around, provided their decision points are enumerable; it does not provide a procedure for tasks whose success criterion is itself ambiguous. Second, participants working from the written protocol alone recovered the intended labels in the large majority of cases, which indicates that the protocol is transmissible in writing and does not depend on tacit knowledge held by the authors. This is the property required for others to extend RMBench with new tasks.</p>
+                        <p>We state three limitations explicitly, since they bound how the numbers above should be read. First, the reported quantity is agreement with a reference standard rather than chance-corrected agreement among annotators. Fleiss&rsquo; &kappa; over the participants would be the stronger measure, since it separates genuine consensus from the agreement expected by chance and does not privilege the authors&rsquo; labels as ground truth; computing it requires retaining the full per-task label matrix, which we leave to an expanded study. The 96% figure should therefore be read as a measure of how faithfully the protocol transfers to new annotators, and not as an accuracy or as evidence that the labels are independent of the authors&rsquo; judgment. Second, the label space was closed and given to participants in advance, so the study measures consistency of application within that space rather than whether the space itself is the right abstraction. Third, the study reports aggregate agreement only, without a per-label breakdown. The M(1) versus M(n) boundary is the most delicate judgment the protocol requires, since it asks how finely a task decomposes into distinct semantic events, and a per-label breakdown would be needed to establish whether residual disagreement concentrates there.</p>
                     </div>
                 </div>
             </div>
@@ -114,20 +212,107 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
-                    <h2 class="title is-3">Mem-0 Policy</h2>
+                    <h2 class="title is-3">3. Visualization of Typical Baseline Errors</h2>
                 </div>
             </div>
+            <div class="columns is-centered">
+                <div class="column">
+                    <figure class="supp">
+                        <img src="assets/task_error.png" alt="Visualization of typical baseline errors">
+                        <figcaption><strong>Visualization of typical baseline errors.</strong> Because these baselines predict the next action from the current observation alone, they cannot act reliably on non-Markovian tasks in which the required information is no longer visible.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
-                    <img src="./images/Mem-0.jpg" alt="Mem-0 pipeline" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                    <h2 class="title is-3">4. Training Details</h2>
                 </div>
             </div>
-            <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered">
                 <div class="column">
                     <div class="content has-text-justified">
-                        <p>
-                            <b>Mem-0 Pipeline.</b> Mem-0 comprises a Planning Module and an Execution Module linked by a Subtask End Classifier. The Planning Module generates high-level subtasks from the task instruction, the initial observation, and the key memory window (In-Episode Memory), while the Execution Module produces low-level actions from the current observation, subtask, and fused anchor and sliding memories through a flow-matching policy. Upon subtask completion, a key frame is appended to the key memory window, enabling iterative planning and execution until the task terminates.
-                        </p>
+                        <h4 class="title is-5">4.1. Planning Module</h4>
+                        <p>In the Planning Module, we fine-tune the vision-language model (Qwen3-VL-8B-Instruct) using LoRA via LlamaFactory to enable reasoning over key memories. After fine-tuning, we deploy the model with vLLM for efficient loading and inference. The key hyperparameters used for VLM fine-tuning are summarized below. Training is conducted on 8 NVIDIA A800 GPUs and the duration of training for a single task is approximately half an hour.</p>
+                    </div>
+                    <table class="supp">
+                        <caption>Hyperparameters for fine-tuning the Mem-0 Planning Module.</caption>
+                        <thead><tr><th>Configuration</th><th>Value</th></tr></thead>
+                        <tbody>
+                            <tr><td>VLM Backbone</td><td>Qwen3-VL-8B-Instruct</td></tr>
+                            <tr><td>Fine-tuning Type</td><td>LoRA</td></tr>
+                            <tr><td>LoRA Rank</td><td>8</td></tr>
+                            <tr><td>Batch Size</td><td>16</td></tr>
+                            <tr><td>Learning Rate</td><td>1.0 &times; 10<sup>&minus;4</sup></td></tr>
+                            <tr><td>Epochs</td><td>25</td></tr>
+                            <tr><td>LR Scheduler</td><td>Cosine</td></tr>
+                            <tr><td>Warmup Ratio</td><td>0.1</td></tr>
+                            <tr><td>Dtype</td><td>bf16</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="content has-text-justified">
+                        <h4 class="title is-5" style="margin-top: 1.5rem;">4.2. Execution Module</h4>
+                        <p>In this section, we detail the training infrastructure, training organization strategy, and hyperparameter configurations employed for the Execution Module in Mem-0.</p>
+
+                        <h5 class="title is-6" style="margin-top: 1rem;">Model Configuration</h5>
+                        <p>The Execution Module uses Qwen3-VL-2B-Instruct as its vision-language backbone V<sub>exec</sub>, which is smaller than the Qwen3-VL-8B-Instruct model used by the Planning Module, since V<sub>exec</sub> is queried at every control step whereas V<sub>plan</sub> is queried only at subtask boundaries. The action head is a DiT-B transformer trained from scratch with a flow-matching objective, using an action horizon of H = 30 over a 16-dimensional bimanual action space. The Subtask End Classifier operates on the same conditioning vector c<sub>t</sub> as the action head; since c<sub>t</sub> concatenates the two fused memory tokens with the text token, each of width 2048, its dimension is 6144, which the classifier maps through two residual blocks (6144 &rarr; 2048 &rarr; 512) and a linear head to a scalar logit. The tables below report the full configuration, including the memory hyperparameters and the classifier loss terms. Two settings are worth highlighting. First, multiple actions from each chunk are executed before the next inference call, which is what allows the module to sustain a 5&ndash;10 Hz control rate despite invoking a 2B vision-language backbone. Second, the classifier is trained with a positive-class weight of 10.0, since termination frames constitute a small minority of the training frames.</p>
+
+                        <h5 class="title is-6" style="margin-top: 1rem;">Training Infrastructure and Time Budget</h5>
+                        <p>The Execution Module of Mem-0 utilizes a single-task training strategy, where the model is trained from scratch for each specific task. Training is conducted on 8 NVIDIA A800 GPUs with a global batch size of 448 over 30K iterations. The duration of training for a single task is approximately 18 hours.</p>
+
+                        <h5 class="title is-6" style="margin-top: 1rem;">Training Organization Strategy</h5>
+                        <p><strong>Forward pass strategy.</strong> Given the memory-centric architecture of Mem-0, we employ a specialized training methodology. Within each batch, the processes of VLM token generation and DiT-based action chunk generation are executed in parallel. Conversely, the fusion of the sliding and anchor memories requires the temporal integrity of the data, so this stage is processed serially, which keeps all frames within an episode sequentially aligned.</p>
+                        <p>This arrangement keeps the VLM tokens usable for memory fusion without breaking episode ordering. We additionally maintain a global data structure during training that stores the memory state of each episode, which allows memory to be carried across batch boundaries.</p>
+                        <p><strong>Dataloader implementation.</strong> Consequently, the dataloader was custom-designed to align with this architecture. Episodes are distributed as evenly as possible across all GPUs. Each GPU processes its assigned episodes using a specific number of workers and manages the dataloader reset independently. Due to the stochastic nature of the distribution, as training iterations progress, the frames within a global batch become temporally desynchronized. This allows the model to learn simultaneously from data that span various time steps.</p>
+
+                        <h5 class="title is-6" style="margin-top: 1rem;">Hyperparameter Configurations</h5>
+                        <p>The tables below summarize the key training hyperparameters. To balance the learning rate requirements of different modules, we implemented a grouped learning rate strategy alongside a cosine learning rate schedule with linear warm-up. Regarding numerical precision, the VLM and Memory Bank components operate in <code>bfloat16</code>, while all other modules utilize <code>float32</code>. Furthermore, regarding visual inputs, images are resized to 224 &times; 224 and subjected to mild data augmentation via frame-independent <code>ColorJitter</code>, aimed at enhancing the model&rsquo;s generalization capabilities.</p>
+                    </div>
+
+                    <div class="table-pair">
+                        <table class="supp">
+                            <caption>General training settings</caption>
+                            <tbody>
+                                <tr><th>Batch Size (global / per GPU)</th><td>448 / 56</td></tr>
+                                <tr><th>Iterations</th><td>30,000</td></tr>
+                                <tr><th>Max Grad. Norm</th><td>2.5</td></tr>
+                                <tr><th>LR Scheduler</th><td>Cosine</td></tr>
+                                <tr><th>Warmup Ratio</th><td>0.05</td></tr>
+                                <tr><th>Optimizer</th><td>AdamW</td></tr>
+                                <tr><th>Momentum</th><td>&beta;<sub>1</sub>, &beta;<sub>2</sub> = 0.9, 0.999</td></tr>
+                                <tr><th>Weight Decay</th><td>0.005</td></tr>
+                                <tr><th>Workers per GPU</th><td>2</td></tr>
+                                <tr><th>Random Seed</th><td>42</td></tr>
+                                <tr><th>LR (Base / VLM)</th><td>1.0 &times; 10<sup>&minus;5</sup></td></tr>
+                                <tr><th>LR (Action Head / Classifier)</th><td>1.0 &times; 10<sup>&minus;4</sup></td></tr>
+                                <tr><th>Image Resize</th><td>224 &times; 224</td></tr>
+                                <tr><th>Image Augmentation</th><td>ColorJitter</td></tr>
+                            </tbody>
+                        </table>
+                        <table class="supp">
+                            <caption>Backbone, memory, and action settings</caption>
+                            <tbody>
+                                <tr><th>VLM Backbone</th><td>Qwen3-VL-2B-Instruct</td></tr>
+                                <tr><th>Sliding Window Length K</th><td>30</td></tr>
+                                <tr><th>Anchor Buffer Size</th><td>1</td></tr>
+                                <tr><th>Memory Attention Heads</th><td>8</td></tr>
+                                <tr><th>Memory Dropout</th><td>0.1</td></tr>
+                                <tr><th>Architecture</th><td>DiT-B</td></tr>
+                                <tr><th>Hidden Size / Layers</th><td>2048 / 16</td></tr>
+                                <tr><th>Action / State Dimension</th><td>16 / 16</td></tr>
+                                <tr><th>Action Horizon H</th><td>30</td></tr>
+                                <tr><th>Inference Euler Steps</th><td>8</td></tr>
+                                <tr><th>Control Frequency</th><td>5&ndash;10 Hz</td></tr>
+                                <tr><th>Classifier MLP Widths</th><td>6144 &rarr; 2048 &rarr; 512</td></tr>
+                                <tr><th>Positive Weight</th><td>10.0</td></tr>
+                                <tr><th>Decision Threshold</th><td>0.5</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -138,27 +323,71 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
-                    <h2 class="title is-3">Benchmark and Study</h2>
+                    <h2 class="title is-3">5. Additional Visualizations and Analysis of Failure Cases in Mem-0</h2>
                 </div>
             </div>
-            <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered">
                 <div class="column">
-                    <img src="./images/results.jpg" alt="Benchmark results" style="vertical-align:middle;margin:0px 0px" width="100%"/>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <div class="content has-text-justified">
+                        <p>Although Mem-0 improves substantially over the baselines, it remains far from solving RMBench. In this section we present representative cases in which Mem-0 fails, and identify the mechanism responsible for each, so that the residual error modes can be targeted directly by future work.</p>
+                        <h4 class="title is-5" style="margin-top: 1.25rem;">5.1. Failure Analysis for M(1) Tasks</h4>
+                    </div>
+                    <div class="figure-pair">
+                        <figure class="supp">
+                            <img src="assets/failure_observe_and_pickup.png" alt="Failure examples of Observe and Pick Up">
+                            <figcaption><strong>Failure examples of Observe and Pick Up.</strong> <strong>(Top)</strong> Confused by objects with similar colors and shapes. <strong>(Middle)</strong> Confused by identical object morphologies. <strong>(Bottom)</strong> General failure to identify the target, causing the gripper to reach a position averaged over the candidate objects rather than any one of them.</figcaption>
+                        </figure>
+                        <figure class="supp">
+                            <img src="assets/failure_swap_blocks.png" alt="Failure examples of Swap Blocks">
+                            <figcaption><strong>Failure examples of Swap Blocks.</strong> <strong>(Top)</strong> Premature termination after a single subtask. <strong>(Middle)</strong> Premature termination after two subtasks. <strong>(Bottom)</strong> Failure to terminate on time, resulting in the initiation of a redundant subtask.</figcaption>
+                        </figure>
+                    </div>
+                    <figure class="supp">
+                        <img src="assets/failure_rearrange_blocks.png" alt="Failure examples of Rearrange Blocks">
+                        <figcaption><strong>Failure examples of Rearrange Blocks.</strong> Mem-0 redundantly presses the button, resulting in task failure.</figcaption>
+                    </figure>
+                    <div class="content has-text-justified">
+                        <p>For M(1) tasks, in addition to the failures illustrated above, we summarize the representative errors encountered by Mem-0 below.</p>
+                        <p><strong>Observe and Pick Up and Swap Blocks.</strong> The figure illustrates typical failure modes in the <em>Observe and Pick Up</em> task, where Mem-0 fails to accurately identify the target object. Similarly, the <em>Swap Blocks</em> examples present misjudgments regarding the termination of the swapping sequence, resulting in the confirmation button being pressed at inappropriate times.</p>
+                        <p>These instances indicate that the anchor memory influences the policy throughout the entire subtask horizon rather than only at its beginning, so the model must modulate how strongly that fixed context contributes to action prediction as the subtask proceeds. This is consistent with the observation in the main paper that a persistent context can interfere with closed-loop visual alignment once the relevant history is already available elsewhere.</p>
+                        <p>Nevertheless, the ablations confirm that anchor memory is the decisive component on M(1) tasks, where its removal lowers the average success rate from 52.8% to 26.8%. The effect is most pronounced on <em>Put Back Block</em> (90% to 35%) and <em>Swap Blocks</em> (67% to 15%), the two tasks in which the episode-initial configuration is the only record of the required target.</p>
+                        <p><strong>Rearrange Blocks.</strong> The figure illustrates failure cases in the <em>Rearrange Blocks</em> task where Mem-0 performs excessive button presses, a behavior we attribute to the limitations of the sliding memory window. This is consistent with the ablations, in which removing the sliding memory reduces success on this task from 89% to 62%. Inspecting the rollouts, the frequency of redundant button presses increases markedly without sliding memory, which identifies it as a primary failure mode. The sliding memory therefore contributes substantially on this task while leaving room for refinement.</p>
+                        <p><strong>Summary.</strong> Two directions follow. First, richer fusion between the anchor and sliding memories would let the policy weight the persistent context according to how far the subtask has progressed, which is precisely what the failures above require and what a single-slot anchor read cannot express. Second, the residual errors on <em>Observe and Pick Up</em> are perceptual rather than mnemonic, so they call for stronger visual grounding in the backbone rather than additional memory.</p>
 
-    <section class="section">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered has-text-centered">
-                <div class="column">
-                    <h2 class="title is-3">Error Analysis</h2>
-                </div>
-            </div>
-            <div class="columns is-centered has-text-centered">
-                <div class="column">
-                    <img src="./images/errors.jpg" alt="Error analysis" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                        <h4 class="title is-5" style="margin-top: 1.5rem;">5.2. Failure Analysis for M(n) Tasks</h4>
+                        <p>On M(n) tasks the dominant failure mechanism is the accuracy and robustness of the Subtask End Classifier, consistent with the oracle comparison in the main paper, in which ground-truth termination signals raise the M(n) average from 28.5% to 45.3%.</p>
+                    </div>
+                    <figure class="supp">
+                        <img src="assets/failure_cover_blocks.png" alt="Failure examples of Cover Blocks">
+                        <figcaption><strong>Failure examples of Cover Blocks.</strong> The classifier fails to detect the completion of an <em>Uncover &lt;color&gt;</em> subtask, so no subtask transition is triggered. Because the instruction remains unchanged, the policy continues to operate under a stale task context, leading to unintended and erratic behavior.</figcaption>
+                    </figure>
+                    <div class="content has-text-justified">
+                        <p><strong>Cover Blocks.</strong> The classifier occasionally fails to resolve the current task progress, and in particular cannot discriminate whether a given state marks the beginning or the end of a subtask, since the two are visually similar for this task.</p>
+                    </div>
+                    <figure class="supp">
+                        <img src="assets/failure_blocks_ranking_try.png" alt="Failure examples of Blocks Ranking Try">
+                        <figcaption><strong>Failure examples of Blocks Ranking Try.</strong> Upon pressing the button, the system is expected to transition to the next subtask to execute the swapping of designated blocks. However, the classifier fails to trigger this transition promptly, causing the task to stall in the <code>Press button</code> state. This leads to a coordination conflict between the dual arms: the right hand attempts to initiate manipulation while the left hand remains tethered to the button-pressing instruction.</figcaption>
+                    </figure>
+                    <div class="content has-text-justified">
+                        <p><strong>Blocks Ranking Try.</strong> A second challenge concerns button-pressing operations. We observe that introducing button presses interferes with composite tasks that are not exclusively about pressing. In <em>Blocks Ranking Try</em>, for instance, the transition between button-pressing and block-swapping is occasionally not carried out smoothly.</p>
+                        <p>The task is also unforgiving: its success criterion requires the full ranking sequence to be correct, so a single execution error causes the episode to fail. This is consistent with the low absolute scores every method obtains on this task, and with the fact that supplying oracle termination signals raises Mem-0 from 18% to 45%, the largest such improvement among the M(n) tasks.</p>
+                    </div>
+                    <figure class="supp">
+                        <img src="assets/failure_press_button.png" alt="Failure examples of Press Button" style="max-width: 760px; display: block; margin: 0 auto;">
+                        <figcaption><strong>Failure examples of Press Button.</strong> <strong>(Top)</strong> Insufficient presses: the classifier issues a false positive termination signal even though the press was unsuccessful. <strong>(Bottom)</strong> Excessive presses: the classifier fails to recognize a successful completion, leading to redundant execution of the same subtask.</figcaption>
+                    </figure>
+                    <div class="content has-text-justified">
+                        <p><strong>Press Button.</strong> The <em>Press Button</em> task isolates this operation and therefore exposes its difficulty most clearly, which is why every policy in the main results scores zero on it. The button state, pressed versus unpressed, is reflected in the visual input only through very subtle cues, so the visual tokens produced by the VLM backbone do not resolve it. This places a bottleneck upstream of the classifier that no amount of memory can compensate for.</p>
+                    </div>
+                    <figure class="supp">
+                        <img src="assets/failure_battery_try.png" alt="Failure examples of Battery Try">
+                        <figcaption><strong>Failure examples of Battery Try.</strong> <strong>(Top)</strong> For the horizontally oriented cylindrical battery, a suboptimal grasp pose prevents a successful lift and causes significant displacement, leading the model into unforeseen observational states. <strong>(Bottom)</strong> The model fails to commit to a single manipulation strategy during battery adjustment, producing an action averaged over the competing strategies and hence an improper placement in the slot.</figcaption>
+                    </figure>
+                    <div class="content has-text-justified">
+                        <p><strong>Battery Try.</strong> For <em>Battery Try</em> the representative failure mode is limited manipulation precision rather than memory. It comprises insertion errors when placing the battery into the slot, and difficulty selecting a grasp strategy because the slot itself presents very subtle visual cues.</p>
+                        <p><strong>Summary.</strong> Two directions follow from these observations. First, since several of the failures above trace to visual cues that are too subtle to survive tokenization, proprioceptive or tactile feedback would supply the classifier with information that vision does not carry. Second, because the classifier sits at the end of the pipeline and consumes c<sub>t</sub> directly, improving upstream token extraction and the fusion of the anchor and sliding memories would improve termination detection without altering the classifier itself. Both directions target the bottleneck identified in the ablation experiments rather than the memory representation.</p>
+                        <p>The current design nonetheless yields clear gains on M(n) tasks, most visibly on <em>Cover Blocks</em>, where Mem-0 reaches 68% against 40% for the strongest baseline.</p>
+                    </div>
                 </div>
             </div>
         </div>
