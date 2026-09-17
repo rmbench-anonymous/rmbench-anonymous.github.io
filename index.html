@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design. Anonymous project page.">
+  <meta name="keywords" content="Memory, Robotic Manipulation, Benchmark, Policy Design, Simulation, Real-world Experiments">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>RMBench: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+
+  <style>
+    section {
+        margin: 0rem 0;
+    }
+    .hero-body {
+        padding-bottom: 1.5rem;
+    }
+    .video-block video {
+        width: 100%;
+        max-width: 900px;
+        display: block;
+        margin: 0 auto;
+        border-radius: 6px;
+        background: #000;
+    }
+  </style>
+</head>
+<body>
+
+    <section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+                <text style="color: #1c70c0;">RMBench</text>: Memory-Dependent Robotic Manipulation Benchmark with Insights into Policy Design
+            </h1>
+            <div class="conference" style="font-size: 36px; margin-top: 20px; margin-bottom: 20px;">
+                <strong>Under Review</strong>
+            </div>
+            <div class="publication-authors" style="font-size: 18px;">
+                <span class="author-block">Anonymous Authors</span>
+            </div>
+
+            <div class="column has-text-centered">
+                <div class="publication-links">
+
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a target="_blank" href="https://github.com/rmbench-anonymous/RMBench-Anonymous"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                    </a>
+                </span>
+                </div>
+              </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+    <section class="section" style="padding-top: 0.5rem;">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Supplementary Video</h2>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column video-block">
+                    <video controls muted playsinline preload="metadata">
+                        <source src="./assets/supp_video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Overview</h2>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <img src="./images/rmbench_tasks.jpg" alt="RMBench tasks" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <p>
+                            <b>Abstract.</b> Robotic manipulation policies have made rapid progress in recent years, yet most existing approaches give limited consideration to memory capabilities. Consequently, they struggle to solve tasks that require reasoning over historical observations and maintaining task-relevant information over time, which are common in real-world manipulation. Although several memory-aware policies have been proposed, systematic evaluation of memory-dependent manipulation remains underexplored, and the relationship between architectural choices and memory performance remains unclear. To address this gap, we introduce <b>RMBench</b>, a simulation benchmark of nine manipulation tasks spanning two levels of memory complexity for systematic evaluation of policy memory capabilities. We further propose <b>Mem-0</b>, a modular manipulation policy whose explicit memory components can be ablated independently. Evaluating eight policies on the nine simulated tasks and four policies on three physical tasks, we identify memory-related limitations in existing policies and show that the benefit of a memory component depends on whether the same information is already available elsewhere in the policy hierarchy, with subtask termination detection rather than memory representation forming the dominant bottleneck.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Mem-0 Policy</h2>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <img src="./images/Mem-0.jpg" alt="Mem-0 pipeline" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <p>
+                            <b>Mem-0 Pipeline.</b> Mem-0 comprises a Planning Module and an Execution Module linked by a Subtask End Classifier. The Planning Module generates high-level subtasks from the task instruction, the initial observation, and the key memory window (In-Episode Memory), while the Execution Module produces low-level actions from the current observation, subtask, and fused anchor and sliding memories through a flow-matching policy. Upon subtask completion, a key frame is appended to the key memory window, enabling iterative planning and execution until the task terminates.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Benchmark and Study</h2>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <img src="./images/results.jpg" alt="Benchmark results" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Error Analysis</h2>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <img src="./images/errors.jpg" alt="Error analysis" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
