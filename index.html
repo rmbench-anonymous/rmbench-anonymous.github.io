@@ -144,6 +144,72 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
+                    <h2 class="title is-3">Overview</h2>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <img src="./assets/rmbench_tasks.jpg" alt="RMBench tasks" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <p>
+                            <b>Abstract.</b> Robotic manipulation policies have made rapid progress in recent years, yet most existing approaches give limited consideration to memory capabilities. Consequently, they struggle to solve tasks that require reasoning over historical observations and maintaining task-relevant information over time, which are common in real-world manipulation. Although several memory-aware policies have been proposed, systematic evaluation of memory-dependent manipulation remains underexplored, and the relationship between architectural choices and memory performance remains unclear. To address this gap, we introduce <b>RMBench</b>, a simulation benchmark of nine manipulation tasks spanning two levels of memory complexity for systematic evaluation of policy memory capabilities. We further propose <b>Mem-0</b>, a modular manipulation policy whose explicit memory components can be ablated independently. Evaluating eight policies on the nine simulated tasks and four policies on three physical tasks, we identify memory-related limitations in existing policies and show that the benefit of a memory component depends on whether the same information is already available elsewhere in the policy hierarchy, with subtask termination detection rather than memory representation forming the dominant bottleneck.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Mem-0 Policy</h2>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <img src="./assets/Mem-0.jpg" alt="Mem-0 pipeline" style="vertical-align:middle;margin:0px 0px" width="100%"/>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <div class="content has-text-justified">
+                        <p>
+                            <b>Mem-0 Pipeline.</b> Mem-0 comprises a Planning Module and an Execution Module linked by a Subtask End Classifier. The Planning Module generates high-level subtasks from the task instruction, the initial observation, and the key memory window (In-Episode Memory), while the Execution Module produces low-level actions from the current observation, subtask, and fused anchor and sliding memories through a flow-matching policy. Upon subtask completion, a key frame is appended to the key memory window, enabling iterative planning and execution until the task terminates.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Visualization of Typical Baseline Errors</h2>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column">
+                    <figure class="supp">
+                        <img src="assets/task_error.png" alt="Visualization of typical baseline errors">
+                        <figcaption><strong>Visualization of typical baseline errors.</strong> Because these baselines predict the next action from the current observation alone, they cannot act reliably on non-Markovian tasks in which the required information is no longer visible.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
                     <h2 class="title is-3">1. RMBench Task Descriptions</h2>
                 </div>
             </div>
@@ -212,31 +278,13 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
-                    <h2 class="title is-3">3. Visualization of Typical Baseline Errors</h2>
-                </div>
-            </div>
-            <div class="columns is-centered">
-                <div class="column">
-                    <figure class="supp">
-                        <img src="assets/task_error.png" alt="Visualization of typical baseline errors">
-                        <figcaption><strong>Visualization of typical baseline errors.</strong> Because these baselines predict the next action from the current observation alone, they cannot act reliably on non-Markovian tasks in which the required information is no longer visible.</figcaption>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered has-text-centered">
-                <div class="column">
-                    <h2 class="title is-3">4. Training Details</h2>
+                    <h2 class="title is-3">3. Training Details</h2>
                 </div>
             </div>
             <div class="columns is-centered">
                 <div class="column">
                     <div class="content has-text-justified">
-                        <h4 class="title is-5">4.1. Planning Module</h4>
+                        <h4 class="title is-5">3.1. Planning Module</h4>
                         <p>In the Planning Module, we fine-tune the vision-language model (Qwen3-VL-8B-Instruct) using LoRA via LlamaFactory to enable reasoning over key memories. After fine-tuning, we deploy the model with vLLM for efficient loading and inference. The key hyperparameters used for VLM fine-tuning are summarized below. Training is conducted on 8 NVIDIA A800 GPUs and the duration of training for a single task is approximately half an hour.</p>
                     </div>
                     <table class="supp">
@@ -256,7 +304,7 @@
                     </table>
 
                     <div class="content has-text-justified">
-                        <h4 class="title is-5" style="margin-top: 1.5rem;">4.2. Execution Module</h4>
+                        <h4 class="title is-5" style="margin-top: 1.5rem;">3.2. Execution Module</h4>
                         <p>In this section, we detail the training infrastructure, training organization strategy, and hyperparameter configurations employed for the Execution Module in Mem-0.</p>
 
                         <h5 class="title is-6" style="margin-top: 1rem;">Model Configuration</h5>
@@ -323,14 +371,14 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column">
-                    <h2 class="title is-3">5. Additional Visualizations and Analysis of Failure Cases in Mem-0</h2>
+                    <h2 class="title is-3">4. Additional Visualizations and Analysis of Failure Cases in Mem-0</h2>
                 </div>
             </div>
             <div class="columns is-centered">
                 <div class="column">
                     <div class="content has-text-justified">
                         <p>Although Mem-0 improves substantially over the baselines, it remains far from solving RMBench. In this section we present representative cases in which Mem-0 fails, and identify the mechanism responsible for each, so that the residual error modes can be targeted directly by future work.</p>
-                        <h4 class="title is-5" style="margin-top: 1.25rem;">5.1. Failure Analysis for M(1) Tasks</h4>
+                        <h4 class="title is-5" style="margin-top: 1.25rem;">4.1. Failure Analysis for M(1) Tasks</h4>
                     </div>
                     <div class="figure-pair">
                         <figure class="supp">
@@ -354,7 +402,7 @@
                         <p><strong>Rearrange Blocks.</strong> The figure illustrates failure cases in the <em>Rearrange Blocks</em> task where Mem-0 performs excessive button presses, a behavior we attribute to the limitations of the sliding memory window. This is consistent with the ablations, in which removing the sliding memory reduces success on this task from 89% to 62%. Inspecting the rollouts, the frequency of redundant button presses increases markedly without sliding memory, which identifies it as a primary failure mode. The sliding memory therefore contributes substantially on this task while leaving room for refinement.</p>
                         <p><strong>Summary.</strong> Two directions follow. First, richer fusion between the anchor and sliding memories would let the policy weight the persistent context according to how far the subtask has progressed, which is precisely what the failures above require and what a single-slot anchor read cannot express. Second, the residual errors on <em>Observe and Pick Up</em> are perceptual rather than mnemonic, so they call for stronger visual grounding in the backbone rather than additional memory.</p>
 
-                        <h4 class="title is-5" style="margin-top: 1.5rem;">5.2. Failure Analysis for M(n) Tasks</h4>
+                        <h4 class="title is-5" style="margin-top: 1.5rem;">4.2. Failure Analysis for M(n) Tasks</h4>
                         <p>On M(n) tasks the dominant failure mechanism is the accuracy and robustness of the Subtask End Classifier, consistent with the oracle comparison in the main paper, in which ground-truth termination signals raise the M(n) average from 28.5% to 45.3%.</p>
                     </div>
                     <figure class="supp">
